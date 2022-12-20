@@ -14,9 +14,9 @@ const authorsRouter = express.Router();
 authorsRouter.post("/", (req, res) => {
   const newAuthor = {
     ...req.body,
-    createdAt: new Date(),
     id: uniqid(),
     avatar: `https://ui-avatars.com/api/?name=${req.body.name}+${req.body.surname}`,
+    createdAt: new Date(),
   };
   const authorsArray = JSON.parse(fs.readFileSync(authorsJSONpath));
   authorsArray.push(newAuthor);
