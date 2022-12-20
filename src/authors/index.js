@@ -24,6 +24,20 @@ authorsRouter.post("/", (req, res) => {
   res.status(201).send({ id: newAuthor.id });
 });
 
+authorsRouter.post("/checkEmail", (req, res) => {
+  const authorsArray = JSON.parse(fs.readFileSync(authorsJSONpath));
+  const email = req.body.email;
+
+  let results = authorsArray.find((i) => i.email === email);
+
+  if (results === undefined || null) {
+    res.send("Email is free.");
+  }
+  else if (results) {
+    res.send("Email is in use.");
+  }
+});
+
 authorsRouter.get("/", (req, res) => {
   const fileContent = fs.readFileSync(authorsJSONpath);
   const authors = JSON.parse(fileContent);
