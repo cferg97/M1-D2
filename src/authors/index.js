@@ -19,9 +19,17 @@ authorsRouter.post("/", (req, res) => {
     createdAt: new Date(),
   };
   const authorsArray = JSON.parse(fs.readFileSync(authorsJSONpath));
-  authorsArray.push(newAuthor);
-  fs.writeFileSync(authorsJSONpath, JSON.stringify(authorsArray));
-  res.status(201).send({ id: newAuthor.id });
+  const email = req.body.email;
+
+  let results = authorsArray.find((i) => i.email === email);
+
+  if (!results) {
+    authorsArray.push(newAuthor);
+    fs.writeFileSync(authorsJSONpath, JSON.stringify(authorsArray));
+    res.status(201).send({ id: newAuthor.id });
+  } else {
+    res.send("Email is in use, cannot add author.");
+  }
 });
 
 authorsRouter.post("/checkEmail", (req, res) => {
@@ -32,8 +40,7 @@ authorsRouter.post("/checkEmail", (req, res) => {
 
   if (results === undefined || null) {
     res.send("Email is free.");
-  }
-  else if (results) {
+  } else if (results) {
     res.send("Email is in use.");
   }
 });
