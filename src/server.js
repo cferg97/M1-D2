@@ -3,6 +3,7 @@ import listEndpoints from "express-list-endpoints";
 import authorsRouter from "./authors/index.js";
 import postsRouter from "./posts/index.js";
 import filesRouter from "./files/index.js";
+import { coverUploadRouter } from "./files/index.js";
 import cors from "cors";
 import {
   genericErrorHandler,
@@ -23,6 +24,7 @@ server.use(express.json());
 
 server.use("/authors", authorsRouter);
 server.use("/blogposts", postsRouter);
+server.use("/blogposts/uploadCover", coverUploadRouter);
 server.use("/authors/uploadAvatar", filesRouter);
 
 server.use(badRequestHandler);

@@ -32,7 +32,7 @@ postsRouter.post("/", checkPostSchema, triggerBadRequest, (req, res, next) => {
       id: uniqid(),
       category: req.body.category,
       title: req.body.title,
-      cover: req.body.cover,
+      // cover: req.body.cover,
       author: {
         name: req.body.author.name,
         avatar: `https://ui-avatars.com/api/?name=${req.body.author.name}`,
