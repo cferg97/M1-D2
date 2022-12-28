@@ -21,15 +21,13 @@ const postSchema = {
         "Cover is a mandatory field. Please supply a URL to an image.",
     },
   },
-  author: {
-    name: {
-      in: ["body"],
-      isString: {
-        errorMessage: "Author name is a mandatory field.",
-      },
+  "author.name": {
+    in: ["body"],
+    isString: {
+      errorMessage:
+        "Author name is a mandatory field. Please enter a valid name.",
     },
   },
-
   content: {
     in: ["body"],
     isString: {
