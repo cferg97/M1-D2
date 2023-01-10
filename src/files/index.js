@@ -5,6 +5,7 @@ import fs from "fs-extra";
 import { v2 as cloudinary } from "cloudinary";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
 import * as dotenv from "dotenv";
+
 dotenv.config();
 const { readJSON, writeJSON, writeFile } = fs;
 const filesRouter = express.Router();
@@ -81,8 +82,7 @@ coverUploadRouter.post(
       const index = posts.findIndex((post) => post.id === req.params.postid);
       if (index !== -1) {
         const oldPost = posts[index];
-        const cover = { ...oldPost.cover, cover: url };
-        const updatedPost = { ...oldPost, cover, updatedAt: new Date() };
+        const updatedPost = { ...oldPost, cover: url, updatedAt: new Date() };
         posts[index] = updatedPost;
         await writePosts(posts);
       }
