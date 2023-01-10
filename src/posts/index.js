@@ -5,7 +5,6 @@ import { dirname, join } from "path";
 import uniqid from "uniqid";
 import httpErrors from "http-errors";
 import { checkPostSchema, triggerBadRequest } from "./validator.js";
-import { emitWarning } from "process";
 
 const postsRouter = express.Router();
 const { NotFound, Unauthorized, BadRequest } = httpErrors;
