@@ -1,1 +1,16 @@
-[{"category":"internet","title":"WOW","readTime":{"value":"2","unit":"minutes"},"author":{"name":"Fluffy","avatar":"https://ui-avatars.com/api/?name=Fluffy"},"content":"<p>hello i luv u omg hi hi hi can we play hi hi got food?</p>","id":"dgz8ws7klc7w8ccr","createdAt":"2022-12-28T16:50:34.250Z","cover":{"0":"h","1":"t","2":"t","3":"p","4":":","5":"/","6":"/","7":"l","8":"o","9":"c","10":"a","11":"l","12":"h","13":"o","14":"s","15":"t","16":":","17":"3","18":"0","19":"0","20":"1","21":"/","22":"i","23":"m","24":"g","25":"/","26":"u","27":"s","28":"e","29":"r","30":"s","31":"/","32":"d","33":"g","34":"z","35":"8","36":"w","37":"s","38":"7","39":"k","40":"l","41":"c","42":"7","43":"w","44":"8","45":"c","46":"c","47":"r","48":".","49":"p","50":"n","51":"g","cover":"http://localhost:3001/img/users/dgz8ws7klc7w8ccr.png"},"updatedAt":"2022-12-28T16:51:29.401Z"}]
+[
+  {
+    "category": "internet",
+    "title": "WOW",
+    "readTime": { "value": "2", "unit": "minutes" },
+    "author": {
+      "name": "Fluffy",
+      "avatar": "https://ui-avatars.com/api/?name=Fluffy"
+    },
+    "content": "<p>hello i luv u omg hi hi hi can we play hi hi got food?</p>",
+    "id": "dgz8ws7klc7w8ccr",
+    "createdAt": "2022-12-28T16:50:34.250Z",
+    "cover": "http://localhost:3001/img/users/dgz8ws7klc7w8ccr.png",
+    "updatedAt": "2022-12-28T16:51:29.401Z"
+  }
+]
