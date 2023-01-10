@@ -25,45 +25,58 @@ const savePostCover = (fileName, contentAsBuffer) => {
   writeFile(join(publicFolderPath, fileName), contentAsBuffer);
 };
 
-const cloudinaryUploader = multer({
+const cloudinaryUploaderAvatar = multer({
   storage: new CloudinaryStorage({
     cloudinary,
     params: {
       folder: "products/images",
     },
   }),
+}).single("cover");
+
+const cloudinaryUploaderCover = multer({
+  storage: new CloudinaryStorage({
+    cloudinary,
+    params: {
+      folder: "products/cover",
+    },
+  }),
 }).single("avatar");
 
-filesRouter.post("/:authorId", cloudinaryUploader, async (req, res, next) => {
-  try {
-    // const originalFileExtension = extname(req.file.originalname);
-    // const fileName = req.params.authorId + originalFileExtension;
-    // await saveUsersAvatar(fileName, req.file.buffer);
-    const url = req.file.path;
-    const users = await getAuthors();
-    const index = users.findIndex((user) => user.id === req.params.authorId);
-    if (index !== -1) {
-      const oldUser = users[index];
-      const author = { ...oldUser.author, avatar: url };
-      const updatedUser = { ...oldUser, author, updatedAt: new Date() };
-      users[index] = updatedUser;
-      await writeAuthors(users);
+filesRouter.post(
+  "/:authorId",
+  cloudinaryUploaderAvatar,
+  async (req, res, next) => {
+    try {
+      // const originalFileExtension = extname(req.file.originalname);
+      // const fileName = req.params.authorId + originalFileExtension;
+      // await saveUsersAvatar(fileName, req.file.buffer);
+      const url = req.file.path;
+      const users = await getAuthors();
+      const index = users.findIndex((user) => user.id === req.params.authorId);
+      if (index !== -1) {
+        const oldUser = users[index];
+        const author = { ...oldUser.author, avatar: url };
+        const updatedUser = { ...oldUser, author, updatedAt: new Date() };
+        users[index] = updatedUser;
+        await writeAuthors(users);
+      }
+      res.send("File Uploaded");
+    } catch (err) {
+      next(err);
     }
-    res.send("File Uploaded");
-  } catch (err) {
-    next(err);
   }
-});
+);
 
 coverUploadRouter.post(
   "/:postid",
-  multer().single("cover"),
+  cloudinaryUploaderCover,
   async (req, res, next) => {
     try {
-      const originalFileExtension = extname(req.file.originalname);
-      const fileName = req.params.postid + originalFileExtension;
-      await savePostCover(fileName, req.file.buffer);
-      const url = `http://localhost:3001/img/users/${fileName}`;
+      // const originalFileExtension = extname(req.file.originalname);
+      // const fileName = req.params.postid + originalFileExtension;
+      // await savePostCover(fileName, req.file.buffer);
+      const url = req.file.path;
       const posts = await getPosts();
       const index = posts.findIndex((post) => post.id === req.params.postid);
       if (index !== -1) {
