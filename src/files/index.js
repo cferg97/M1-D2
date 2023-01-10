@@ -32,7 +32,7 @@ const cloudinaryUploaderAvatar = multer({
       folder: "products/images",
     },
   }),
-}).single("cover");
+}).single("avatar");
 
 const cloudinaryUploaderCover = multer({
   storage: new CloudinaryStorage({
@@ -41,7 +41,7 @@ const cloudinaryUploaderCover = multer({
       folder: "products/cover",
     },
   }),
-}).single("avatar");
+}).single("cover");
 
 filesRouter.post(
   "/:authorId",
