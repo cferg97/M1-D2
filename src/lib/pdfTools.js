@@ -10,7 +10,7 @@ export const getPDFReadableStream = (post) => {
   const printer = new PdfPrinter(fonts);
 
   const docDefinition = {
-    content: [post.title, post.content],
+    content: [post.title, post.author, post.content],
   };
 
   const pdfReadableStream = printer.createPdfKitDocument(docDefinition);
