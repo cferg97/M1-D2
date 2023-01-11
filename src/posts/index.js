@@ -5,6 +5,8 @@ import { dirname, join } from "path";
 import uniqid from "uniqid";
 import httpErrors from "http-errors";
 import { checkPostSchema, triggerBadRequest } from "./validator.js";
+import { getPDFReadableStream } from "../lib/pdfTools.js";
+import { pipeline } from "stream";
 
 const postsRouter = express.Router();
 const { NotFound, Unauthorized, BadRequest } = httpErrors;
@@ -83,6 +85,17 @@ postsRouter.delete("/:postid", (req, res) => {
   );
   fs.writeFileSync(blogpostsJSONpath, JSON.stringify(remainingPosts));
   res.status(204).send();
+});
+
+postsRouter.get("/pdf/:postid", (req, res, next) => {
+  res.setHeader("Content-Disposition", "attachment; filename=document.pdf");
+  const postid = req.params.postid;
+  const post = findPost(postid);
+  const source = getPDFReadableStream(post);
+  const destination = res
+  pipeline(source, destination, err => {
+    if(err) console.log(err)
+  })
 });
 
 export default postsRouter;

@@ -77,12 +77,11 @@ coverUploadRouter.post(
       // const originalFileExtension = extname(req.file.originalname);
       // const fileName = req.params.postid + originalFileExtension;
       // await savePostCover(fileName, req.file.buffer);
-      const url = req.file.path;
       const posts = await getPosts();
       const index = posts.findIndex((post) => post.id === req.params.postid);
       if (index !== -1) {
         const oldPost = posts[index];
-        const updatedPost = { ...oldPost, cover: url, updatedAt: new Date() };
+        const updatedPost = { ...oldPost, cover: req.file.path, updatedAt: new Date() };
         posts[index] = updatedPost;
         await writePosts(posts);
       }
@@ -92,5 +91,6 @@ coverUploadRouter.post(
     }
   }
 );
+
 
 export default filesRouter;
