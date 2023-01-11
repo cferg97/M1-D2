@@ -87,15 +87,15 @@ postsRouter.delete("/:postid", (req, res) => {
   res.status(204).send();
 });
 
-postsRouter.get("/pdf/:postid", (req, res, next) => {
-  res.setHeader("Content-Disposition", "attachment; filename=document.pdf");
+postsRouter.get("/pdf/:postid", (req, res) => {
+  res.setHeader("Content-Disposition", "attachment; filename=test.pdf");
   const postid = req.params.postid;
   const post = findPost(postid);
-  const source = getPDFReadableStream(post);
-  const destination = res
-  pipeline(source, destination, err => {
-    if(err) console.log(err)
-  })
+  const source = getPDFReadableStream({ post });
+  const destination = res;
+  pipeline(source, destination, (err) => {
+    if (err) console.log(err);
+  });
 });
 
 export default postsRouter;
