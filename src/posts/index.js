@@ -82,7 +82,7 @@ postsRouter.delete("/:postid", (req, res) => {
     (post) => post.id !== req.params.postid
   );
   fs.writeFileSync(blogpostsJSONpath, JSON.stringify(remainingPosts));
-  res.status(202).send("Post deleted.");
+  res.status(204).send();
 });
 
 export default postsRouter;
