@@ -66,8 +66,8 @@ postsRouter.put("/:postid", (req, res) => {
   );
   const oldPost = blogpostsArray[index];
   const updatedPost = {
-    ...oldPost,
     ...req.body,
+    ...oldPost,
     author: {
       ...oldPost.author,
       name: req.body.author.name,
