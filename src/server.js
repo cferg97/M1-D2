@@ -15,7 +15,7 @@ import { join } from "path";
 import * as dotenv from "dotenv";
 dotenv.config();
 const server = express();
-const port = process.env.PORT;
+const port = 3001
 const publicFolderPath = join(process.cwd(), "./public");
 
 server.use(express.static(publicFolderPath));

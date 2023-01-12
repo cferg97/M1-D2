@@ -1,0 +1,16 @@
+[
+  {
+    "category": "internet",
+    "title": "WOW",
+    "readTime": { "value": "2", "unit": "minutes" },
+    "author": {
+      "name": "Fluffy",
+      "avatar": "https://ui-avatars.com/api/?name=Fluffy"
+    },
+    "content": "<p>hello i luv u omg hi hi hi can we play hi hi got food?</p>",
+    "id": "dgz8ws7klc7w8ccr",
+    "createdAt": "2022-12-28T16:50:34.250Z",
+    "cover": "http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcTUNYRJGfr6dAmrrvtz8mF5qV0ojVV9cuEFzswwOcfqxd4EDeDD05eO-KSs2uLidN92YVgeCdcpdthCF4E",
+    "updatedAt": "2022-12-28T16:51:29.401Z"
+  }
+]

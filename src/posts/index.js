@@ -7,6 +7,8 @@ import httpErrors from "http-errors";
 import { checkPostSchema, triggerBadRequest } from "./validator.js";
 import { getPDFReadableStream } from "../lib/pdfTools.js";
 import { pipeline } from "stream";
+import { getJSONReadableStream } from "../lib/tools.js";
+import json2csv from "json2csv"
 
 const postsRouter = express.Router();
 const { NotFound, Unauthorized, BadRequest } = httpErrors;
@@ -25,6 +27,20 @@ const findPost = (postid) => {
 postsRouter.get("/", (req, res) => {
   res.send(blogpostsArray);
 });
+
+postsRouter.get("/CSV", async (req, res, next) => {
+  try{
+    const source = await getJSONReadableStream
+    res.setHeader("Content-Disposition", "attachment; filename=posts.csv")
+    const transform = new json2csv.Transform({fields: ["id", "title", "category", "content"]})
+    const destination = res
+    pipeline(source, transform, destination, err => {
+      if(err) console.log(err)
+    })
+  }catch(err){
+    next(err)
+  }
+})
 
 postsRouter.post("/", checkPostSchema, triggerBadRequest, (req, res, next) => {
   try {
@@ -86,6 +102,10 @@ postsRouter.delete("/:postid", (req, res) => {
   fs.writeFileSync(blogpostsJSONpath, JSON.stringify(remainingPosts));
   res.status(204).send();
 });
+
+postsRouter.get("/CSV", async (req, res, next) => {
+
+})
 
 postsRouter.get("/pdf/:postid", (req, res) => {
   res.setHeader("Content-Disposition", "attachment; filename=test.pdf");
